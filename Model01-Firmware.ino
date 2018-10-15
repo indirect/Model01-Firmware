@@ -260,7 +260,7 @@ KEYMAPS(
   // Edit this keymap to make a custom layout
   [PRIMARY] = KEYMAP_STACKED(
     Key_Backtick,       Key_1,          Key_2,        Key_3,        Key_4,  Key_5,  Key_LEDEffectNext,
-    Key_Tab,            Key_Quote,      Key_Comma,    Key_Period,   Key_P,  Key_Y,  Key_Tab,
+    Key_Backtick,       Key_Quote,      Key_Comma,    Key_Period,   Key_P,  Key_Y,  Key_Tab,
     CTL_T(Escape),      Key_A,          Key_O,        Key_E,        Key_U,  Key_I,
     Key_Escape,         Key_Semicolon,  Key_Q,        Key_J,        Key_K,  Key_X,  LALT(Key_Backspace),
     Key_LeftShift,      Key_Backspace,  Key_LeftGui,  Key_LeftAlt,
