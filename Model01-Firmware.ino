@@ -72,6 +72,9 @@
 // Support for USB quirks, like changing the key state report protocol
 #include "Kaleidoscope-USB-Quirks.h"
 
+// Support for keys that act differently when tapped or held down
+#include <Kaleidoscope-Qukeys.h>
+
 /** This 'enum' is a list of all the macros used by the Model 01's firmware
   * The names aren't particularly important. What is important is that each
   * is unique.
@@ -253,10 +256,10 @@ KEYMAPS(
 
   // Edit this keymap to make a custom layout
   [PRIMARY] = KEYMAP_STACKED(
-    ___,                Key_1,          Key_2,        Key_3,        Key_4,  Key_5,  Key_LEDEffectNext,
-    Key_Backtick,       Key_Quote,      Key_Comma,    Key_Period,   Key_P,  Key_Y,  Key_Tab,
-    Key_LeftControl,    Key_A,          Key_O,        Key_E,        Key_U,  Key_I,
-    XXX,                Key_Semicolon,  Key_Q,        Key_J,        Key_K,  Key_X,  LALT(Key_Backspace),
+    Key_Backtick,       Key_1,          Key_2,        Key_3,        Key_4,  Key_5,  Key_LEDEffectNext,
+    Key_Tab,            Key_Quote,      Key_Comma,    Key_Period,   Key_P,  Key_Y,  Key_Tab,
+    CTL_T(Escape),      Key_A,          Key_O,        Key_E,        Key_U,  Key_I,
+    Key_Escape,         Key_Semicolon,  Key_Q,        Key_J,        Key_K,  Key_X,  LALT(Key_Backspace),
     Key_LeftShift,      Key_Backspace,  Key_LeftGui,  Key_LeftAlt,
     ShiftToLayer(LFN),
 
@@ -555,6 +558,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // actions - a bit like Macros, but triggered by pressing multiple keys at the
   // same time.
   MagicCombo,
+
+  // Keys that do one thing when tapped and another when held.
+  Qukeys,
 
   // The USBQuirks plugin lets you do some things with USB that we aren't
   // comfortable - or able - to do automatically, but can be useful
