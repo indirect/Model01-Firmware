@@ -139,7 +139,8 @@ enum { MACRO_VERSION_INFO,
   *
   */
 
-enum { PRIMARY, NUMPAD, FUNCTION }; // layers
+enum { PRIMARY, LFN, RFN, MOUSE, // layers
+       NUMPAD, FUNCTION }; // default firmware layers
 
 
 /**
@@ -155,10 +156,10 @@ enum { PRIMARY, NUMPAD, FUNCTION }; // layers
   *
   */
 
-#define PRIMARY_KEYMAP_QWERTY
+// #define PRIMARY_KEYMAP_QWERTY
 // #define PRIMARY_KEYMAP_COLEMAK
 // #define PRIMARY_KEYMAP_DVORAK
-// #define PRIMARY_KEYMAP_CUSTOM
+#define PRIMARY_KEYMAP_CUSTOM
 
 
 
@@ -220,29 +221,106 @@ KEYMAPS(
    ShiftToLayer(FUNCTION)),
 
 #elif defined (PRIMARY_KEYMAP_CUSTOM)
-  // Edit this keymap to make a custom layout
-  [PRIMARY] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
-   ShiftToLayer(FUNCTION),
+  // Number row symbol aliases
+  #define Key_Bang LSHIFT(Key_1)
+  #define Key_At LSHIFT(Key_2)
+  #define Key_Hash LSHIFT(Key_3)
+  #define Key_Dollar LSHIFT(Key_4)
+  #define Key_Percent LSHIFT(Key_5)
+  #define Key_Caret LSHIFT(Key_6)
+  #define Key_And LSHIFT(Key_7)
+  #define Key_Star LSHIFT(Key_8)
+  #define Key_Lparen LSHIFT(Key_9)
+  #define Key_Rparen LSHIFT(Key_0)
 
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD),
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_RightAlt,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
-   Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl,
-   ShiftToLayer(FUNCTION)),
+  // Other symbol aliases
+  #define Key_Tilde LSHIFT(Key_Backtick)
+  #define Key_Underscore LSHIFT(Key_Minus)
+  #define Key_Plus LSHIFT(Key_Equals)
+  #define Key_LeftCurly Key_LeftCurlyBracket
+  #define Key_RightCurly Key_RightCurlyBracket
+
+  // OS controls
+  #define Key_VolDown Consumer_VolumeDecrement
+  #define Key_VolUp   Consumer_VolumeIncrement
+  #define Key_BriDown Key_F14
+  #define Key_BriUp   Key_F15
+
+  // Meta key aliases
+  #define MEH(k) LALT(LCTRL(LGUI((k))))
+  #define Key_Meh LALT(LCTRL(Key_LeftGui))
+  #define Key_Hyper LALT(LCTRL(LGUI(Key_LeftShift)))
+
+  // Edit this keymap to make a custom layout
+  [PRIMARY] = KEYMAP_STACKED(
+    ___,                Key_1,          Key_2,        Key_3,        Key_4,  Key_5,  Key_LEDEffectNext,
+    Key_Backtick,       Key_Quote,      Key_Comma,    Key_Period,   Key_P,  Key_Y,  Key_Tab,
+    Key_LeftControl,    Key_A,          Key_O,        Key_E,        Key_U,  Key_I,
+    XXX,                Key_Semicolon,  Key_Q,        Key_J,        Key_K,  Key_X,  LALT(Key_Backspace),
+    Key_LeftShift,      Key_Backspace,  Key_LeftGui,  Key_LeftAlt,
+    ShiftToLayer(LFN),
+
+    LockLayer(MOUSE),   Key_6,         Key_7,         Key_8,            Key_9,  Key_0,  Key_Backslash,
+    Key_Enter,          Key_F,         Key_G,         Key_C,            Key_R,  Key_L,  Key_Slash,
+    /*nokey*/           Key_D,         Key_H,         Key_T,            Key_N,  Key_S,  Key_Minus,
+    Key_RightControl,   Key_B,         Key_M,         Key_W,            Key_V,  Key_Z,  Key_Equals,
+    Key_RightAlt,       Key_RightGui,  Key_Spacebar,  Key_RightShift,
+    ShiftToLayer(RFN)
+  ),
+
+  [LFN] =  KEYMAP_STACKED (
+    ___,              Key_F1,                 Key_F2,               Key_F3,              Key_F4,                Key_F5,                  ___,
+    Key_Tab,          ___,                    LGUI(Key_LeftCurly),  MEH(Key_UpArrow),    LGUI(Key_RightCurly),  ___,                     ___,
+    Key_PageUp,       LGUI(Key_LeftBracket),  MEH(Key_LeftArrow),   MEH(Key_DownArrow),  MEH(Key_RightArrow),   LGUI(Key_RightBracket),
+    Key_PageDown,     ___,                    LGUI(Key_Tilde),      MEH(Key_M),          LGUI(Key_Backtick),    ___,                     LALT(Key_Delete),
+    ___,              Key_Delete,             ___,                  ___,
+    ___,
+
+    ___,              Key_F6,     Key_F7,         Key_F8,          Key_F9,           Key_F10,           Key_F11,
+    Key_KeypadEnter,  Key_Bang,   Key_At,         Key_Hash,        Key_Dollar,       Key_Percent,       Key_F12,
+    /*nokey*/         Key_Caret,  Key_And,        Key_Star,        Key_Lparen,       Key_Rparen,        ___,
+    ___,              ___,        Key_LeftCurly,  Key_RightCurly,  Key_LeftBracket,  Key_RightBracket,  ___,
+    ___,              ___,        Key_Enter,      ___,
+    ___
+  ),
+
+  [RFN] =  KEYMAP_STACKED (
+    ___,       Key_F1,      Key_F2,  Key_F3,  Key_F4,  Key_F5,  ___,
+    Key_Tab,   Key_1,       Key_2,   Key_3,   Key_4,   Key_5,   ___,
+    Key_Home,  Key_6,       Key_7,   Key_8,   Key_9,   Key_0,
+    Key_End,   ___,         ___,     ___,     ___,     ___,     LALT(Key_Delete),
+    ___,       Key_Delete,  ___,     ___,
+    ___,
+
+    ___,              Key_F6,         Key_F7,          Key_F8,         Key_F9,           Key_F10,           Key_F11,
+    Key_KeypadEnter,  Key_LeftCurly,  Key_RightCurly,  Key_UpArrow,    Key_LeftBracket,  Key_RightBracket,  Key_F12,
+    /*nokey*/         ___,            Key_LeftArrow,   Key_DownArrow,  Key_RightArrow,   ___,               Key_Underscore,
+    ___,              Key_Mute,       Key_VolDown,     Key_VolUp,      Key_BriDown,      Key_BriUp,         Key_Plus,
+    ___,              ___,            Key_Enter,       ___,
+    ___
+   ),
+
+  [MOUSE] =  KEYMAP_STACKED (
+    ___,                ___,  ___,            ___,            ___,            ___,              ___,
+    Key_Tab,            ___,  Key_mouseBtnL,  Key_mouseUp,    Key_mouseBtnR,  Key_mouseWarpEnd, Key_mouseWarpNE,
+    Key_mouseScrollUp,  ___,  Key_mouseL,     Key_mouseDn,    Key_mouseR,     Key_mouseWarpNW,
+    Key_mouseScrollDn,  ___,  ___,            Key_mouseBtnM,  ___,            Key_mouseWarpSW,  Key_mouseWarpSE,
+    ___,                ___,  ___,            ___,
+    ___,
+
+    ___,       ___,  ___,                         ___,                      ___,                     ___,  ___,
+    ___,       ___,  ___,                         ___,                      ___,                     ___,  ___,
+    /*nokey*/  ___,  Consumer_ScanPreviousTrack,  Consumer_PlaySlashPause,  Consumer_ScanNextTrack,  ___,  ___,
+    ___,       ___,  ___,                         ___,                      ___,                     ___,  ___,
+    ___,       ___,  ___,                         ___,
+    ___
+  ),
 
 #else
 
 #error "No default keymap defined. You should make sure that you have a line like '#define PRIMARY_KEYMAP_QWERTY' in your sketch"
 
 #endif
-
-
 
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
