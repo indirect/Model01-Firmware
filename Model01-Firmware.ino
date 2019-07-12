@@ -250,9 +250,8 @@ KEYMAPS(
   #define Key_BriUp   Key_F15
 
   // Meta key aliases
-  #define MEH(k) LALT(LCTRL(LGUI((k))))
-  #define Key_Meh LALT(LCTRL(Key_LeftGui))
-  #define Key_Hyper LALT(LCTRL(LGUI(Key_LeftShift)))
+  #define CAG(k) LALT(LCTRL(LGUI((k))))
+  #define Key_Cag LALT(LCTRL(Key_LeftGui))
 
   // Edit this keymap to make a custom layout
   [PRIMARY] = KEYMAP_STACKED(
@@ -273,9 +272,9 @@ KEYMAPS(
 
   [LFN] =  KEYMAP_STACKED (
     ___,              Key_F1,                 Key_F2,               Key_F3,              Key_F4,                Key_F5,                  ___,
-    Key_Tab,          ___,                    LGUI(Key_LeftCurly),  MEH(Key_UpArrow),    LGUI(Key_RightCurly),  ___,                     ___,
-    Key_PageUp,       LGUI(Key_LeftBracket),  MEH(Key_LeftArrow),   MEH(Key_DownArrow),  MEH(Key_RightArrow),   LGUI(Key_RightBracket),
-    Key_PageDown,     ___,                    LGUI(Key_Tilde),      MEH(Key_M),          LGUI(Key_Backtick),    ___,                     LALT(Key_Delete),
+    Key_Tab,          ___,                    LGUI(Key_LeftCurly),  CAG(Key_UpArrow),    LGUI(Key_RightCurly),  ___,                     ___,
+    Key_PageUp,       LGUI(Key_LeftBracket),  CAG(Key_LeftArrow),   CAG(Key_DownArrow),  CAG(Key_RightArrow),   LGUI(Key_RightBracket),
+    Key_PageDown,     ___,                    LGUI(Key_Tilde),      CAG(Key_M),          LGUI(Key_Backtick),    ___,                     LALT(Key_Delete),
     ___,              Key_Delete,             ___,                  ___,
     ___,
 
