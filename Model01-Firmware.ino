@@ -552,7 +552,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDPaletteTheme,
 
   // The Colormap effect makes it possible to set up per-layer colormaps
-  ColormapEffect,
+  // ColormapEffect,
 
   // The macros plugin adds support for macros
   Macros,
@@ -610,7 +610,7 @@ void setup() {
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to five layers, which is how
   // many editable layers we have (see above).
-  ColormapEffect.max_layers(5);
+  // ColormapEffect.max_layers(5);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
