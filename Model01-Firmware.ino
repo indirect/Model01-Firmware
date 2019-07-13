@@ -516,7 +516,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDRainbowWaveEffect,
 
   // The breathe effect slowly pulses all of the LEDs on your keyboard
-  LEDBreatheEffect,
+  // LEDBreatheEffect,
 
   // The Colormap effect makes it possible to set up per-layer colormaps
   // ColormapEffect,
