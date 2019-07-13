@@ -545,7 +545,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDRainbowWaveEffect,
 
   // The breathe effect slowly pulses all of the LEDs on your keyboard
-  LEDBreatheEffect,
+  // LEDBreatheEffect,
 
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
